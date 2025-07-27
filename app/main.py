@@ -3,6 +3,8 @@ import requests
 import os
 from dotenv import load_dotenv
 from fastapi.responses import JSONResponse
+from fastapi import FastAPI, HTTPException
+
 
 load_dotenv()
 
@@ -12,8 +14,7 @@ app = FastAPI(
     version="0.1.0"
 )
 
-app.include_router(router)from fastapi import FastAPI, HTTPException
-
+app.include_router(router)
 app = FastAPI(title="Summa API", description="🎬 FastAPI backend for movie info")
 
 OMDB_API_KEY = os.getenv("OMDB_API_KEY")
