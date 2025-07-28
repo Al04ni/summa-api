@@ -1,10 +1,19 @@
 services:
   - type: web
     name: summa-api
+    runtime: docker
+    region: ohio
     env: python
-    plan: free
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port 8080 --workers 4
     envVars:
       - key: OMDB_API_KEY
-        sync: false
+        value: your_omdb_api_key
+    autoScaling:
+      enabled: true
+      minInstances: 2
+      maxInstances: 10
+      criteria:
+        cpu: 70
+        memory: 80
+    healthCheckPath: /health
