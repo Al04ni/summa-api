@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Query, HTTPException
 from app.services import omdb
-from app.services.storage import save_as_json, save_as_csv
+from app.utils import save_as_csv, save_as_json
 
 router = APIRouter()
 
